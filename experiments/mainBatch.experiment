@@ -1,0 +1,31 @@
+experiment mainBatch model: '../models/Main.gaml'
+	type:batch
+//	repeat: 100
+	keep_seed: false
+//	benchmark: true
+	until: (cycle = 1320) 
+{
+		reflex end_of_runs {
+		ask simulations {
+			save [
+				total_water_demand,
+				total_production,
+				total_revenue
+			]
+				to: "../results/total_results.csv" 
+				type: "csv" 
+				rewrite: false;
+
+			ask Farmer {
+				save [
+					name,
+					number_of_fields,
+					cash
+				]
+					to: "../results/per_farmer.csv"
+					type: "csv"
+					rewrite: false;
+			}
+		}
+	}
+}
